@@ -5,11 +5,22 @@ fs.readFile("NnNTNFEY.txt", function(err, data) {
         throw new Error(`Error reading data: ${err}`)
     }
 
-    const testText = data.toString();
+    const sampleText = data.toString();
 
-    const results = testText.match(/@softwire.com/g);
+    const arrayOfEmailDomains = sampleText.match(/@[a-zA-Z\-\.]+/g);
 
-    console.log(results.length)
+    console.log(arrayOfEmailDomains.length)
 
+    const objectOfEmailsDomains = {};
+
+    arrayOfEmailDomains.forEach(domain => {
+        if(objectOfEmailsDomains[domain] >= 1){
+            return objectOfEmailsDomains[domain] += 1
+        } else {
+            return objectOfEmailsDomains[domain] = 1;
+        }
+    })
+
+    console.log(objectOfEmailsDomains)
 });
 
