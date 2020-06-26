@@ -11,16 +11,16 @@ fs.readFile("NnNTNFEY.txt", function(err, data) {
 
     console.log(arrayOfEmailDomains.length)
 
-    const objectOfEmailsDomains = {};
-
-    arrayOfEmailDomains.forEach(domain => {
-        if(objectOfEmailsDomains[domain] >= 1){
-            return objectOfEmailsDomains[domain] += 1
+    const reducer = (objectOfEmails, domain) => {
+        if(objectOfEmails[domain] >= 1){
+            objectOfEmails[domain] += 1
         } else {
-            return objectOfEmailsDomains[domain] = 1;
+            objectOfEmails[domain] = 1;
         }
-    })
+        return objectOfEmails;
+    }
 
-    console.log(objectOfEmailsDomains)
+    const domainFrequencies = arrayOfEmailDomains.reduce(reducer, {})
+
+    console.log(domainFrequencies)
 });
-
